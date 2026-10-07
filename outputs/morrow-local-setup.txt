@@ -1,0 +1,38 @@
+VNTERA CLINIC LOCAL APP
+
+Start here
+1. Open morrow-clinic.html in a current Chrome or Edge browser on the clinic computer.
+2. On first run, create the doctor's account and password. There are no sample patients.
+3. Open Staff & permissions to add each receptionist with a separate login and selected access.
+4. Add the clinic's LBP-per-USD rate in Settings before recording an LBP payment.
+
+Local storage and access
+- Records save in this browser profile on this device. Keep the HTML in the same file location and use the same browser profile; moving the file can make existing data appear missing. Records do not sync between computers by default.
+- Use a separate operating-system account for the clinic and enable full-disk encryption. Do not share the browser profile.
+- The app checks staff passwords with PBKDF2, but this standalone page does not encrypt patient data at rest and browser-only permissions are not a security boundary against someone with access to the device or browser developer tools.
+- Download backups regularly and store them securely. A backup includes patient data, account password hashes, and integration settings. Moving the HTML to another browser profile may require restoring a backup.
+- This is a local-first clinic tool, not a hosted or compliance-certified SaaS product. Have the clinic's privacy/security lead review it before storing regulated patient data.
+
+Calendar and payments
+- Calendar dates and times follow the clinic computer's local clock and time zone. Month, week, and day views are available; use the ICS export to add visits to a separate calendar.
+- Payments may be recorded in USD or LBP. Set and verify the clinic's current LBP-per-USD rate; the rate used is saved with each payment and USD totals use that historical rate.
+
+Google Sheets shared app
+- This is an Apps Script-hosted app with server-checked staff login and permissions. It is not a compliance-certified medical-record system. Use synthetic test data until the clinic's privacy/security lead approves the design and deployment.
+1. In Google Sheets, create or open the clinic spreadsheet and choose Extensions > Apps Script.
+2. Replace the Apps Script editor's `Code.gs` with the contents of `outputs/Code.gs` and save.
+3. In Apps Script, click + next to Files, choose HTML, name the file `App`, and paste the full contents of `outputs/morrow-clinic.html` into it. `doGet()` serves this file, so the name must be exactly `App`.
+4. In Project Settings > Script Properties, add `SPREADSHEET_ID` with the spreadsheet ID (the part of its URL between `/d/` and `/edit`). Add `FIRST_DOCTOR_SETUP_CODE` with a temporary, hard-to-guess setup code. Do not add the old `SYNC_SECRET` property.
+5. Choose Deploy > New deployment > Web app. Set Execute as to Me so the script accesses the spreadsheet as its owner. For separate app-managed staff passwords to work, the page must be reachable without requiring each staff member to sign into Google. Choose Anyone only if your Google account or Workspace policy permits it; otherwise ask the Workspace administrator about an approved deployment. Never make the spreadsheet itself public.
+6. Authorize the script when prompted and open the Web App URL ending in `/exec`. The first owner enters the one-time setup code and creates the doctor account. Successful setup deletes the code property. The doctor can then add staff accounts and select permissions in Staff & permissions.
+7. Staff use that same `/exec` URL and sign in with their assigned email and password. The downloaded `morrow-clinic.html` remains local-only; it does not use the shared server.
+8. The server creates `ClinicData`, `Users`, and `StaffMessages` tabs. Clinic records/settings/activity are stored in `ClinicData`, account roles/permissions and password hashes in `Users`, and staff chat in `StaffMessages`. Do not share the spreadsheet with staff unless the clinic explicitly intends them to see all sheet contents.
+9. To update the web app later, edit both Apps Script files, then Deploy > Manage deployments > Edit and deploy a new version. Recheck the `/exec` URL and test sign-in and changes with synthetic data.
+10. The app can export a JSON backup. Store it securely because it contains clinic records and staff account details. Importing a backup into the shared app is disabled; preserve spreadsheet copies/version history for recovery. The old `morrow-sheets-sync.gs` is a legacy exporter and must not be deployed.
+- The previously supplied `/exec` link currently redirects to Google sign-in in our browser session, so its deployment access and contents could not be verified or changed. A deployment reachable by the clinic staff, or access to the Apps Script project, is needed for live testing.
+
+Email (optional)
+- Default mail app: choose Open default mail app in Settings. This opens a draft; the clinic's email program sends it. Configure the clinic mailbox in that email program.
+- Custom REST API: choose Custom REST email API, enter an HTTPS endpoint that accepts JSON {from,to,subject,text} and CORS requests, and enter its bearer token in each send dialog. The token is not saved by the app.
+- Local SMTP: a browser cannot speak SMTP directly. The included morrow-smtp-relay.mjs helper sends through SMTP from this computer. It requires Node.js 20.6+ and a mailbox's SMTP host, port, username, and password. Copy morrow-smtp-relay.mjs, morrow-smtp-relay-package.json, and morrow-smtp-relay.env.example into one folder. Rename the package file to package.json and the env example to .env, fill in the provider settings, then run npm install and npm start in that folder. In the app choose Custom REST email API, set the endpoint to http://127.0.0.1:8787/send, and enter MAIL_RELAY_TOKEN in the send dialog. The relay binds to this computer only and ignores the From address supplied by the page; set SMTP_FROM in .env.
+- The Hostinger MCP configuration is for an MCP-enabled client, not a browser email API. It cannot be launched by this standalone HTML. Use Hostinger SMTP with the local relay or provide a separate REST email endpoint.

@@ -1,0 +1,11 @@
+{
+  "name": "morrow-local-smtp-relay",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env morrow-smtp-relay.mjs"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}
