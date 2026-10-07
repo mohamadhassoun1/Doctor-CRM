@@ -200,28 +200,39 @@
     .log-text{font-size:9.5px;color:#5c6b64;margin-top:3px;overflow-wrap:anywhere;line-height:1.45}
     .log-time{font-size:9px;color:#94a09a;text-align:right;white-space:nowrap;line-height:1.5}
     @media(max-width:650px){.staff-chat{height:68vh}.chat-feed{padding:11px 10px}.chat-row{max-width:94%}.chat-compose{padding:9px 10px;gap:7px}.chat-compose textarea{min-height:36px}.log-time{font-size:8px}}
-    .client-inbox{display:grid;grid-template-columns:290px 1fr;height:600px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;margin-top:10px}
-    .inbox-sidebar{border-right:1px solid var(--line);background:#fafbfb;display:flex;flex-direction:column;height:100%}
-    .inbox-sidebar-head{padding:11px 12px 10px;border-bottom:1px solid var(--line)}
-    .inbox-patient-list{flex:1;overflow-y:auto;padding:6px;display:flex;flex-direction:column;gap:3px}
-    .inbox-patient-item{width:100%;display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;border:0;background:transparent;text-align:left;cursor:pointer;transition:background .14s}
+    .client-inbox{display:grid;grid-template-columns:310px 1fr;height:clamp(540px,calc(100vh - 210px),760px);border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;margin-top:10px}
+    .inbox-sidebar{border-right:1px solid var(--line);background:#fafbfb;display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden}
+    .inbox-sidebar-head{padding:10px 12px;border-bottom:1px solid var(--line);flex-shrink:0;display:flex;flex-direction:column;gap:6px}
+    .inbox-patient-list{flex:1 1 0%;min-height:0;height:100%;max-height:100%;overflow-y:auto;overflow-x:hidden;padding:8px 6px;display:flex;flex-direction:column;gap:4px;scroll-behavior:smooth;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    .inbox-patient-list::-webkit-scrollbar{width:6px}
+    .inbox-patient-list::-webkit-scrollbar-track{background:transparent}
+    .inbox-patient-list::-webkit-scrollbar-thumb{background:#c3cfc8;border-radius:999px}
+    .inbox-patient-list::-webkit-scrollbar-thumb:hover{background:#96a69e}
+    .inbox-patient-item{width:100%;display:flex;align-items:center;gap:10px;padding:10px 11px;border-radius:9px;border:0;background:transparent;text-align:left;cursor:pointer;transition:background .14s,box-shadow .14s;flex-shrink:0}
     .inbox-patient-item:hover{background:#edf3f0}
-    .inbox-patient-item.active{background:var(--mint);box-shadow:inset 3px 0 0 var(--forest)}
+    .inbox-patient-item.active{background:var(--mint);box-shadow:inset 3.5px 0 0 var(--forest)}
     .inbox-patient-info{min-width:0;flex:1}
     .inbox-patient-name{font-size:10.5px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
     .inbox-patient-time{font-size:8px;color:#8a9690;font-weight:normal}
     .inbox-patient-last{font-size:8.5px;color:#7c8983;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-    .inbox-main{display:flex;flex-direction:column;height:100%;background:#fff}
-    .inbox-main-head{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.95)}
+    .inbox-main{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden;background:#fff;position:relative}
+    .inbox-main-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.98);flex-shrink:0;gap:10px;z-index:2}
     .inbox-main-meta{display:flex;align-items:center;gap:10px}
-    .inbox-feed{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:9px;background:#f8faf9}
-    .inbox-bubble{max-width:76%;padding:8px 12px;border-radius:10px;font-size:11px;line-height:1.45;position:relative;box-shadow:0 1px 2px rgba(16,35,31,.06)}
+    #clientChatFeed,.inbox-feed{flex:1 1 0%;min-height:0;height:100%;max-height:100%;overflow-y:auto;overflow-x:hidden;padding:16px 18px;display:flex;flex-direction:column;gap:10px;background:#f8faf9;scroll-behavior:smooth;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+    #clientChatFeed::-webkit-scrollbar,.inbox-feed::-webkit-scrollbar{width:6px}
+    #clientChatFeed::-webkit-scrollbar-track,.inbox-feed::-webkit-scrollbar-track{background:transparent}
+    #clientChatFeed::-webkit-scrollbar-thumb,.inbox-feed::-webkit-scrollbar-thumb{background:#c3cfc8;border-radius:999px}
+    #clientChatFeed::-webkit-scrollbar-thumb:hover,.inbox-feed::-webkit-scrollbar-thumb:hover{background:#96a69e}
+    .inbox-bubble{max-width:78%;padding:9px 13px;border-radius:10px;font-size:11px;line-height:1.45;position:relative;box-shadow:0 1px 2px rgba(16,35,31,.06);word-break:break-word}
     .inbox-bubble.clinic{align-self:flex-end;background:var(--mint);color:var(--ink);border-bottom-right-radius:2px}
     .inbox-bubble.client{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:2px}
-    .inbox-meta{display:flex;align-items:center;justify-content:flex-end;gap:5px;font-size:8px;color:#7a8a83;margin-top:3px}
-    .inbox-badge{display:inline-block;padding:1px 5px;border-radius:4px;font-size:7px;background:rgba(0,0,0,.05);color:#5c6b64}
-    .inbox-compose{padding:11px 15px;border-top:1px solid var(--line);background:#fff;display:flex;flex-direction:column;gap:7px}
-    @media(max-width:850px){.client-inbox{grid-template-columns:1fr;height:auto}.inbox-sidebar{max-height:240px}}
+    .inbox-meta{display:flex;align-items:center;justify-content:flex-end;gap:6px;font-size:8px;color:#7a8a83;margin-top:4px}
+    .inbox-badge{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:4px;font-size:7.5px;background:rgba(0,0,0,.05);color:#5c6b64}
+    .inbox-compose{padding:11px 16px;border-top:1px solid var(--line);background:#fff;display:flex;flex-direction:column;gap:8px;flex-shrink:0;z-index:2}
+    .modal-actions [data-action="delete-patient"]{color:#dc2626!important;background:#fef2f2!important;border:1px solid #fecaca!important;font-weight:600!important;border-radius:8px!important;padding:0 12px!important;display:inline-flex!important;align-items:center!important;gap:5px!important;transition:all .15s ease!important}
+    .modal-actions [data-action="delete-patient"]:hover{background:#fee2e2!important;border-color:#f87171!important;color:#b91c1c!important;box-shadow:0 1px 3px rgba(220,38,38,0.12)!important}
+    .email-inquiry-card{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:9px 13px;margin:10px 14px 6px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    @media(max-width:850px){.client-inbox{grid-template-columns:1fr;height:auto;max-height:none}.inbox-sidebar{max-height:260px;min-height:180px}#clientChatFeed,.inbox-feed{min-height:320px;max-height:440px}}
   </style>
   <style>
     .desktop-menu{display:none}
@@ -345,6 +356,7 @@
       mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>',message:'<path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.6-3.4A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 10h7M8 13h4"/>',search:'<circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.2 4.2"/>',
       shieldSmall:'<path d="M12 3 4.5 6v5.5c0 5 3.2 8 7.5 9.5 4.3-1.5 7.5-4.5 7.5-9.5V6L12 3Z"/>',
       user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+      trash:'<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/>',
       list:'<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>'
     };
     const icon=(name,size=16)=>`<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconPaths[name]||iconPaths.home}</svg>`;
@@ -357,6 +369,155 @@
     const CHAT_EMOJIS=["\u{1F44D}","\u{2764}\u{FE0F}","\u{1F602}","\u{1F62E}","\u{1F622}","\u{1F64F}"];
     const chatNameColor=(id,name)=>chatNameColors[(String(id||"").length+String(name||"").length)%chatNameColors.length];
     function scrollChatFeed(){const feed=$("#staffChatFeed");if(feed)feed.scrollTop=feed.scrollHeight;}
+    function scrollClientChatFeed(){const feed=$("#clientChatFeed");if(feed)feed.scrollTop=feed.scrollHeight;}
+    let isSyncingClientReplies=false;
+    async function syncClientReplies(silent=false){
+      if(isSyncingClientReplies)return;
+      isSyncingClientReplies=true;
+      try{
+        const res=await fetch("/api/check-incoming-emails?limit=30");
+        if(!res.ok){
+          if(!silent) toast(`Could not check emails: Server ${res.status}`,true);
+          return;
+        }
+        const data=await res.json();
+        if(!data.ok||!Array.isArray(data.messages)){
+          if(!silent) toast(data.error||"Failed to check Hostinger mailbox",true);
+          return;
+        }
+        if(!db.clientMessages) db.clientMessages=[];
+        let newCount=0;
+        let lastSender="";
+        let lastSnippet="";
+
+        for(const msg of data.messages){
+          const fromEmail=(msg.fromEmail||"").toLowerCase().trim();
+          if(!fromEmail) continue;
+
+          // Check if already recorded
+          const exists=db.clientMessages.some(m=>
+            (m.id&&m.id===msg.id)||
+            (m.messageId&&m.messageId===msg.messageId)||
+            (m.createdAt===msg.date&&m.body===msg.body)
+          );
+          if(exists) continue;
+
+          // Match patient by email if already in patient records (and not marked non-patient)
+          let patient=null;
+          const isMarkedNonPatient=(db.nonPatientEmails||[]).includes(fromEmail);
+          if(!isMarkedNonPatient){
+            patient=db.patients.find(p=>(p.email||"").toLowerCase().trim()===fromEmail);
+            if(!patient){
+              patient=db.patients.find(p=>p.email&&fromEmail.includes(p.email.toLowerCase().trim()));
+            }
+          }
+          const senderDisplayName=msg.fromName||(patient?patient.name:fromEmail.split("@")[0]);
+
+          const record={
+            id:msg.id||makeId("cmsg"),
+            messageId:msg.messageId||"",
+            patientId:patient?patient.id:"",
+            contactEmail:fromEmail,
+            contactName:senderDisplayName,
+            sender:"client",
+            senderName:senderDisplayName,
+            channel:"email",
+            subject:msg.subject,
+            body:msg.body,
+            fullText:msg.fullText,
+            createdAt:msg.date||new Date().toISOString(),
+            isRealEmail:true
+          };
+          db.clientMessages.push(record);
+          newCount++;
+          lastSender=senderDisplayName;
+          lastSnippet=msg.body;
+
+          if(!selectedClientPatientId){
+            selectedClientPatientId=patient?patient.id:("email:"+fromEmail);
+          }
+        }
+
+        if(newCount>0){
+          saveDB();
+          if(page==="communications"){
+            const list=$(".inbox-patient-list");
+            const listScroll=list?list.scrollTop:0;
+            render();
+            const newList=$(".inbox-patient-list");
+            if(newList&&listScroll) newList.scrollTop=listScroll;
+            scrollClientChatFeed();
+          }
+          toast(`Received ${newCount} real email ${newCount===1?"reply":"replies"} from ${lastSender}: "${lastSnippet.slice(0,40)}"`);
+        }else if(!silent){
+          toast("Hostinger inbox checked — no new client replies.");
+        }
+      }catch(err){
+        console.error("Error checking replies:",err);
+        if(!silent) toast(`Error checking Hostinger mailbox: ${err.message}`,true);
+      }finally{
+        isSyncingClientReplies=false;
+      }
+    }
+    function getInboxConversations(){
+      const convos=[];
+      const patientEmailMap=new Map();
+      (db.patients||[]).forEach(p=>{
+        if(p.email) patientEmailMap.set(p.email.toLowerCase().trim(),p);
+      });
+      (db.patients||[]).forEach(p=>{
+        const pEmail=(p.email||"").toLowerCase().trim();
+        const msgs=(db.clientMessages||[]).filter(m=>
+          m.patientId===p.id||
+          (pEmail&&m.contactEmail&&m.contactEmail.toLowerCase().trim()===pEmail)
+        );
+        convos.push({
+          id:p.id,
+          patientId:p.id,
+          name:p.name,
+          email:p.email||"",
+          phone:p.phone||"",
+          reference:p.reference||"Patient",
+          isPatient:true,
+          patient:p,
+          messages:msgs,
+          lastMsg:msgs[msgs.length-1]||null
+        });
+      });
+      const nonPatientEmailMap=new Map();
+      (db.clientMessages||[]).forEach(m=>{
+        const p=m.patientId?findPatient(m.patientId):null;
+        const email=(m.contactEmail||(m.sender==="client"?m.fromEmail:"")||"").toLowerCase().trim();
+        if(!p&&email&&!patientEmailMap.has(email)){
+          if(!nonPatientEmailMap.has(email)){
+            nonPatientEmailMap.set(email,{
+              email,
+              name:m.contactName||m.senderName||email.split("@")[0],
+              messages:[]
+            });
+          }
+          nonPatientEmailMap.get(email).messages.push(m);
+          if(m.contactName&&m.contactName!==email&&nonPatientEmailMap.get(email).name===email.split("@")[0]){
+            nonPatientEmailMap.get(email).name=m.contactName;
+          }
+        }
+      });
+      nonPatientEmailMap.forEach((data,email)=>{
+        convos.push({
+          id:"email:"+email,
+          patientId:"",
+          name:data.name,
+          email:email,
+          phone:"",
+          reference:"Email Inquiry",
+          isPatient:false,
+          patient:null,
+          messages:data.messages,
+          lastMsg:data.messages[data.messages.length-1]||null
+        });
+      });
+      return convos;
+    }
     const dateObj=key=>new Date(`${key}T12:00:00`);
     const dateLabel=(key,options={month:"short",day:"numeric"})=>dateObj(key).toLocaleDateString(undefined,options);
     const longDate=key=>dateObj(key).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
@@ -383,7 +544,7 @@
     }
     function blankDB(){return {version:2,users:[],patients:[],appointments:[],payments:[],templates:structuredClone(seedTemplates),staffMessages:[],clientMessages:[],settings:{clinicName:"My Clinic",clinicPhone:"",timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC",lbpPerUsd:"",emailMode:"api",emailFrom:"support@vntera.com",emailEndpoint:"/api/send",smtpHost:"smtp.hostinger.com",smtpPort:465,smtpSecure:true,smtpUser:"support@vntera.com",sheetsUrl:"",sheetsSecret:"",sheetsConsent:false,sheetsReady:false,sheetsRevision:0,welcomeImage:""},theme:"ocean",animations:true,sections:{banner:true,statAppointments:true,statPatients:true,statPending:true,statCollected:true,minical:true,today:true,week:true,collections:true,followups:true,availability:true},activity:[],lastSaved:null};}
     function readDB(){try{const raw=localStorage.getItem(STORE_KEY);if(!raw)return blankDB();const saved=JSON.parse(raw),base=blankDB(),dbRes={...base,...saved,settings:{...base.settings,...saved.settings},sections:mergeSections(base.sections,saved.sections),users:Array.isArray(saved.users)?saved.users:[],patients:Array.isArray(saved.patients)?saved.patients:[],appointments:Array.isArray(saved.appointments)?saved.appointments:[],payments:Array.isArray(saved.payments)?saved.payments:[],templates:Array.isArray(saved.templates)?saved.templates:base.templates,staffMessages:Array.isArray(saved.staffMessages)?saved.staffMessages:[],clientMessages:Array.isArray(saved.clientMessages)?saved.clientMessages:[]};if(!dbRes.settings.emailEndpoint)dbRes.settings.emailEndpoint="/api/send";if(!dbRes.settings.emailFrom)dbRes.settings.emailFrom="support@vntera.com";if(!dbRes.settings.emailMode||dbRes.settings.emailMode==="mailto")dbRes.settings.emailMode="api";if(!dbRes.settings.smtpHost)dbRes.settings.smtpHost="smtp.hostinger.com";if(!dbRes.settings.smtpPort)dbRes.settings.smtpPort=465;if(dbRes.settings.smtpSecure===undefined)dbRes.settings.smtpSecure=true;if(!dbRes.settings.smtpUser)dbRes.settings.smtpUser="support@vntera.com";return dbRes;}catch{return blankDB();}}
-    let db=readDB(),currentUser=null,appointmentFilter="all",appointmentSearch="",patientSearch="",clientSearch="",selectedClientPatientId="",communicationsTab="inbox",calendarDate=todayKey(),calendarMode="month",overviewCalDate=todayKey(),modalContext=null,sheetResult=null,pendingSheetKind="all",serverUser=null,serverRevision=0,serverNeedsSetup=false,serverSetupCodeReady=false,serverSessionToken=SERVER_MODE?sessionStorage.getItem(SESSION_KEY)||"":"",serverSaveTimer=null,serverSaveBusy=false,serverSavePending=false,customizeMode=false,ovDragId=null,apptDragId=null,ovResize=null;
+    let db=readDB(),currentUser=null,appointmentFilter="all",appointmentSearch="",patientSearch="",clientSearch="",clientInboxFilter="all",selectedClientPatientId="",communicationsTab="inbox",calendarDate=todayKey(),calendarMode="month",overviewCalDate=todayKey(),modalContext=null,sheetResult=null,pendingSheetKind="all",serverUser=null,serverRevision=0,serverNeedsSetup=false,serverSetupCodeReady=false,serverSessionToken=SERVER_MODE?sessionStorage.getItem(SESSION_KEY)||"":"",serverSaveTimer=null,serverSaveBusy=false,serverSavePending=false,customizeMode=false,ovDragId=null,apptDragId=null,ovResize=null;
     function serverCall(name,...args){return new Promise((resolve,reject)=>{if(!SERVER_MODE){reject(new Error("Open the deployed Apps Script app to use the shared clinic backend."));return;}const runner=google.script.run.withSuccessHandler(resolve).withFailureHandler(error=>reject(new Error(error&&error.message||String(error))));if(typeof runner[name]!=="function"){reject(new Error(`Apps Script function ${name} is not available. Update Code.gs and redeploy.`));return;}runner[name](...args);});}
     function normalizeServerDatabase(input){const base=blankDB(),data=input&&typeof input==="object"?input:{};return {...base,...data,settings:{...base.settings,...data.settings,sheetsUrl:"",sheetsSecret:"",sheetsConsent:false,sheetsReady:false,sheetsRevision:0},sections:mergeSections(base.sections,data.sections),users:Array.isArray(data.users)?data.users:[],patients:Array.isArray(data.patients)?data.patients:[],appointments:Array.isArray(data.appointments)?data.appointments:[],payments:Array.isArray(data.payments)?data.payments:[],templates:Array.isArray(data.templates)?data.templates:[],activity:Array.isArray(data.activity)?data.activity:[],staffMessages:[]};}
     function setServerSession(result){serverSessionToken=result.token;sessionStorage.setItem(SESSION_KEY,serverSessionToken);serverUser=result.user;currentUser=serverUser;serverRevision=Number(result.revision)||0;db=normalizeServerDatabase(result.database);serverNeedsSetup=false;page="overview";if(runDataRepairs())saveDB();render();welcomeAssetKey="";syncWelcomeAsset();}
@@ -482,7 +643,13 @@
       $("#mainContent").innerHTML=serverPageCopy(renderPage());
       $("#mainContent").classList.toggle("ov-editing",customizeMode&&page==="overview");
       if(sheetResult){const banner=document.createElement("div");banner.className="import-result";banner.textContent=`Sheet imported: ${sheetResult.added} added, ${sheetResult.updated} updated, ${sheetResult.skipped} skipped.`;$("#mainContent").prepend(banner);sheetResult=null;}
-      document.title=`${(navItems.find(item=>item.id===page)||navItems[0]).label} | ${db.settings.clinicName||"Vntera Clinic"}`;updateClock();animateStatValues();if(page==="staffChat")scrollChatFeed();
+      document.title=`${(navItems.find(item=>item.id===page)||navItems[0]).label} | ${db.settings.clinicName||"Vntera Clinic"}`;updateClock();animateStatValues();
+      if(page==="staffChat")scrollChatFeed();
+      if(page==="communications"){
+        scrollClientChatFeed();
+        const activeItem=document.querySelector(".inbox-patient-item.active");
+        if(activeItem) activeItem.scrollIntoView({block:"nearest"});
+      }
     }
     function renderPage(){const nav=navItems.find(item=>item.id===page);if(nav&&!can(nav.permission)){page="overview";return renderPage();}switch(page){case"appointments":return renderAppointments();case"patients":return renderPatients();case"calendar":return renderCalendar();case"billing":return renderBilling();case"communications":return renderCommunications();case"staffChat":return renderStaffChat();case"reports":return renderReports();case"team":return renderTeam();case"settings":return renderSettings();case"profile":return renderProfile();case"logs":return renderLogs();default:return renderOverview();}}
     function pageHeading(eyebrow,title,subtitle,actions=""){return `<div class="page-heading"><div><div class="eyebrow">${esc(eyebrow)}</div><h1 class="page-title">${esc(title)}</h1>${subtitle?`<p class="page-subtitle">${esc(subtitle)}</p>`:""}</div><div class="heading-actions">${actions}</div></div>`;}
@@ -646,100 +813,167 @@
     }
     function renderClientInbox(){
       if(!db.clientMessages) db.clientMessages=[];
-      if(!selectedClientPatientId && db.patients.length > 0){
-        selectedClientPatientId = db.patients[0].id;
-      }
-      const filteredPatients = db.patients.filter(p => !clientSearch || (p.name + " " + (p.email||"") + " " + (p.phone||"") + " " + (p.reference||"")).toLowerCase().includes(clientSearch.toLowerCase()));
-      const selectedPatient = db.patients.find(p => p.id === selectedClientPatientId) || filteredPatients[0] || null;
-      if(selectedPatient && selectedPatient.id !== selectedClientPatientId){
-        selectedClientPatientId = selectedPatient.id;
+      const convos=getInboxConversations();
+      if(!selectedClientPatientId && convos.length > 0){
+        selectedClientPatientId=convos[0].id;
       }
 
-      let patientListHtml = "";
-      if(db.patients.length === 0){
-        patientListHtml = `<div style="padding:28px 14px;text-align:center;color:#87938d;font-size:9.5px">
+      let displayedConvos=convos;
+      if(clientInboxFilter==="patients") displayedConvos=convos.filter(c=>c.isPatient);
+      else if(clientInboxFilter==="inquiries") displayedConvos=convos.filter(c=>!c.isPatient);
+
+      const filteredConvos=displayedConvos.filter(c=>!clientSearch || (c.name + " " + (c.email||"") + " " + (c.phone||"") + " " + (c.reference||"")).toLowerCase().includes(clientSearch.toLowerCase()));
+      const selectedConvo=convos.find(c=>c.id===selectedClientPatientId) || filteredConvos[0] || convos[0] || null;
+      if(selectedConvo && selectedConvo.id!==selectedClientPatientId){
+        selectedClientPatientId=selectedConvo.id;
+      }
+
+      let patientListHtml="";
+      if(convos.length===0){
+        patientListHtml=`<div style="padding:28px 14px;text-align:center;color:#87938d;font-size:9.5px">
           <div style="font-size:26px;margin-bottom:8px">👥</div>
-          <strong style="color:var(--ink);display:block;margin-bottom:4px">No clients registered</strong>
-          <span style="color:#7a8a83;display:block;margin-bottom:12px">Add patients or create a sample client to start chatting right away.</span>
-          <button class="secondary-btn" data-action="create-starter-client" style="font-size:9px">${icon("plus",11)} Add sample client</button>
+          <strong style="color:var(--ink);display:block;margin-bottom:4px">No conversations yet</strong>
+          <span style="color:#7a8a83;display:block;margin-bottom:12px">Register a patient or sync incoming emails from Hostinger.</span>
+          <div style="display:flex;gap:6px;justify-content:center">
+            <button class="secondary-btn" data-action="sync-client-replies" style="font-size:8.5px">${icon("mail",11)} Sync emails</button>
+            <button class="primary-btn" data-action="add-patient" style="font-size:8.5px">${icon("plus",11)} New client</button>
+          </div>
         </div>`;
-      } else if(filteredPatients.length === 0){
-        patientListHtml = `<div style="padding:24px 12px;text-align:center;color:#87938d;font-size:9px">No clients match "<b>${esc(clientSearch)}</b>".</div>`;
+      } else if(filteredConvos.length===0){
+        patientListHtml=`<div style="padding:24px 12px;text-align:center;color:#87938d;font-size:9px">No conversations match "${esc(clientSearch)}".</div>`;
       } else {
-        patientListHtml = filteredPatients.map(person => {
-          const msgs = (db.clientMessages || []).filter(m => m.patientId === person.id);
-          const lastMsg = msgs[msgs.length - 1];
-          const snippet = lastMsg ? (lastMsg.channel === 'email' ? '✉️ ' + lastMsg.body : lastMsg.body) : (person.email || person.phone || "Start new conversation");
-          const timeStr = lastMsg ? new Date(lastMsg.createdAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "";
-          const isSelected = selectedPatient && selectedPatient.id === person.id;
-          return `<button class="inbox-patient-item ${isSelected ? 'active' : ''}" data-action="select-client-chat" data-id="${esc(person.id)}">
-            ${avatar(person.name, person.id)}
+        patientListHtml=filteredConvos.map(convo=>{
+          const msgs=convo.messages;
+          const lastMsg=convo.lastMsg;
+          const hasEmailReply=msgs.some(m=>m.sender==='client'&&m.channel==='email');
+          const snippet=lastMsg ? (lastMsg.channel==='email' ? '✉️ ' + lastMsg.body : lastMsg.body) : (convo.email || convo.phone || "Start new conversation");
+          const timeStr=lastMsg ? new Date(lastMsg.createdAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) : "";
+          const isSelected=selectedConvo && selectedConvo.id===convo.id;
+          const itemAvatar=convo.isPatient ? avatar(convo.name, convo.id) : `<span class="avatar lilac" style="background:#e0f2fe;color:#0284c7">${icon("mail",12)}</span>`;
+          return `<button class="inbox-patient-item ${isSelected ? 'active' : ''}" id="inboxClient-${esc(convo.id)}" data-action="select-client-chat" data-id="${esc(convo.id)}" style="${!convo.isPatient && !isSelected ? 'background:#f8fafc;' : ''}">
+            ${itemAvatar}
             <div class="inbox-patient-info">
-              <div class="inbox-patient-name"><span>${esc(person.name)}</span><span class="inbox-patient-time">${timeStr}</span></div>
+              <div class="inbox-patient-name">
+                <span style="display:flex;align-items:center;gap:4px">
+                  ${esc(convo.name)}
+                  ${!convo.isPatient ? `<span style="font-size:7.5px;color:#0284c7;background:#e0f2fe;padding:1px 4px;border-radius:4px;font-weight:700">Inquiry</span>` : ''}
+                  ${hasEmailReply && convo.isPatient ? `<span style="font-size:7.5px;color:#18533b;background:#def3e8;padding:1px 4px;border-radius:4px;font-weight:700">Reply</span>` : ''}
+                </span>
+                <span class="inbox-patient-time">${timeStr}</span>
+              </div>
               <div class="inbox-patient-last">${esc(snippet)}</div>
             </div>
           </button>`;
         }).join("");
       }
 
-      let mainPaneHtml = "";
-      if(!selectedPatient){
-        mainPaneHtml = `<div style="display:grid;place-items:center;height:100%;color:#87938d;font-size:10px;text-align:center;padding:28px">
+      let mainPaneHtml="";
+      if(!selectedConvo){
+        mainPaneHtml=`<div style="display:grid;place-items:center;height:100%;color:#87938d;font-size:10px;text-align:center;padding:28px">
           <div>
             <div style="font-size:32px;margin-bottom:10px">💬</div>
             <strong style="color:var(--ink);font-size:13px">Client Inbox &amp; Direct Chat</strong>
-            <p style="margin:6px 0 16px;color:#7a8a83;max-width:320px">Select any patient from the left column to view message history, chat in real-time, or dispatch synchronized email notices.</p>
+            <p style="margin:6px 0 16px;color:#7a8a83;max-width:320px">Select any client or email inquiry from the list to view conversations, send Hostinger emails, or view real incoming replies.</p>
             <div style="display:flex;gap:8px;justify-content:center">
-              <button class="primary-btn" data-action="create-starter-client">${icon("plus",12)} Add sample client to chat</button>
-              <button class="secondary-btn" data-action="add-patient">${icon("plus",12)} New client</button>
+              <button class="secondary-btn" data-action="sync-client-replies">${icon("mail",12)} Sync real replies</button>
+              <button class="primary-btn" data-action="add-patient">${icon("plus",12)} New client</button>
             </div>
           </div>
         </div>`;
       } else {
-        const threadMessages = (db.clientMessages || []).filter(m => m.patientId === selectedPatient.id);
-        const feedHtml = threadMessages.length ? threadMessages.map(msg => {
-          const isClinic = msg.sender === "clinic";
-          const time = new Date(msg.createdAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-          const date = new Date(msg.createdAt).toLocaleDateString([], {month:"short", day:"numeric"});
-          const senderLabel = isClinic ? (msg.senderName || "Clinic") : selectedPatient.name;
+        const threadMessages=selectedConvo.messages;
+        const feedHtml=threadMessages.length ? threadMessages.map(msg=>{
+          const isClinic=msg.sender==="clinic";
+          const time=new Date(msg.createdAt).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+          const date=new Date(msg.createdAt).toLocaleDateString([], {month:"short", day:"numeric"});
+          const senderLabel=isClinic ? (msg.senderName || "Clinic") : (msg.senderName || selectedConvo.name);
+          const isEmailReply=msg.channel==="email" && !isClinic;
           return `<div class="inbox-bubble ${isClinic ? 'clinic' : 'client'}">
-            <div style="font-size:8px;font-weight:700;color:${isClinic?'var(--forest)':'#3b6859'};margin-bottom:2px">${esc(senderLabel)}</div>
+            <div style="font-size:8.5px;font-weight:700;color:${isClinic?'var(--forest)':'#205a46'};margin-bottom:3px;display:flex;justify-content:space-between;align-items:center;gap:6px">
+              <span>${esc(senderLabel)}</span>
+              ${isEmailReply ? `
+                <div style="display:flex;align-items:center;gap:5px">
+                  <span class="inbox-badge" style="background:#def3e8;color:#18533b;font-weight:700">✉️ Real client email reply</span>
+                  ${!selectedConvo.isPatient ? `<button class="soft-btn" type="button" data-action="add-convo-as-patient" data-id="${esc(selectedConvo.id)}" style="font-size:7.5px;padding:1px 6px;color:var(--forest);min-height:auto;background:rgba(255,255,255,0.7)">+ Add as patient</button>` : ''}
+                </div>
+              ` : ''}
+            </div>
+            ${msg.subject && msg.subject !== '(No subject)' ? `<div style="font-size:8px;color:#6b7c74;margin-bottom:3px;font-weight:600">Re: ${esc(msg.subject.replace(/^Re:\s*/i, ''))}</div>` : ''}
             <div style="white-space:pre-wrap;word-break:break-word">${esc(msg.body)}</div>
+            ${msg.fullText && msg.fullText !== msg.body && msg.fullText.length > msg.body.length ? `
+              <details style="margin-top:5px;font-size:8px;color:#7a8a83">
+                <summary style="cursor:pointer;user-select:none;color:#5a7065">View quoted email text</summary>
+                <pre style="white-space:pre-wrap;font-family:inherit;font-size:8px;margin-top:3px;padding:5px 7px;background:rgba(0,0,0,.03);border-radius:5px;max-height:110px;overflow-y:auto">${esc(msg.fullText)}</pre>
+              </details>
+            ` : ''}
             <div class="inbox-meta">
-              ${msg.channel === 'email' ? `<span class="inbox-badge">✉️ Delivered via Hostinger email</span>` : ''}
+              ${isClinic && msg.channel === 'email' ? `<span class="inbox-badge">✉️ Delivered via Hostinger SMTP</span>` : ''}
               <time>${date} ${time}</time>
               ${isClinic ? '<span style="color:#2ba384" title="Delivered">✓✓</span>' : ''}
             </div>
           </div>`;
         }).join("") : `<div style="text-align:center;color:#8a9690;font-size:9.5px;margin:auto;padding:32px 0">
           <div style="font-size:24px;margin-bottom:6px">✉️</div>
-          <strong>No messages with ${esc(selectedPatient.name)} yet.</strong>
-          <p style="margin:4px 0 0;color:#7a8a83">Type a message below to send via instant chat &amp; Hostinger email!</p>
+          <strong>No messages with ${esc(selectedConvo.name)} yet.</strong>
+          <p style="margin:4px 0 0;color:#7a8a83">Write a message below to dispatch via instant chat &amp; Hostinger email!</p>
+          <div style="margin-top:10px">
+            <button class="secondary-btn" data-action="sync-client-replies" style="font-size:8.5px">${icon("mail",12)} Sync real email replies</button>
+          </div>
         </div>`;
+
+        const bannerHtml = !selectedConvo.isPatient ? `
+          <div class="email-inquiry-card">
+            <div style="font-size:9.5px;color:#166534">
+              <strong style="display:flex;align-items:center;gap:5px">${icon("mail",12)} External email contact (Not registered as a patient)</strong>
+              <span style="font-size:8.5px;color:#365314;display:block;margin-top:2px"><b>${esc(selectedConvo.name)}</b> &lt;${esc(selectedConvo.email)}&gt; contacted your clinic. Messages can be exchanged via Hostinger email or added to your practice directory.</span>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center">
+              <button class="primary-btn" data-action="add-convo-as-patient" data-id="${esc(selectedConvo.id)}" style="font-size:8.5px;padding:5px 12px;white-space:nowrap;background:var(--forest);display:inline-flex;align-items:center;gap:4px">
+                ${icon("plus",10)} Add as patient
+              </button>
+            </div>
+          </div>
+        ` : '';
+
+        const headerAvatar = selectedConvo.isPatient ? avatar(selectedConvo.name, selectedConvo.id) : `<span class="avatar lilac" style="background:#e0f2fe;color:#0284c7">${icon("mail",14)}</span>`;
 
         mainPaneHtml = `
           <div class="inbox-main-head">
             <div class="inbox-main-meta">
-              ${avatar(selectedPatient.name, selectedPatient.id)}
+              ${headerAvatar}
               <div>
-                <strong style="font-size:11.5px;color:var(--ink)">${esc(selectedPatient.name)}</strong>
-                <div style="font-size:8.5px;color:#7a8a83">${esc(selectedPatient.email || "No email on file")} &middot; ${esc(selectedPatient.phone || "No phone")} &middot; <span style="font-size:8px;color:#899791">${esc(selectedPatient.id)}</span></div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <strong style="font-size:12px;color:var(--ink)">${esc(selectedConvo.name)}</strong>
+                  ${selectedConvo.isPatient ? `<span class="pill confirmed" style="font-size:7.5px;padding:1px 5px">Registered patient</span>` : `<span class="pill" style="font-size:7.5px;padding:1px 5px;background:#e0f2fe;color:#0369a1;font-weight:700">✉️ Email Contact</span>`}
+                </div>
+                <div style="font-size:8.5px;color:#7a8a83">${esc(selectedConvo.email || "No email on file")} ${selectedConvo.phone ? " &middot; " + esc(selectedConvo.phone) : ""} &middot; <span style="font-size:8px;color:#899791">${selectedConvo.isPatient ? esc(selectedConvo.patientId) : "External email inquiry"}</span></div>
               </div>
             </div>
             <div style="display:flex;gap:6px;align-items:center">
-              <button class="soft-btn" data-action="patient-detail" data-id="${esc(selectedPatient.id)}" style="font-size:8.5px">Patient record</button>
-              <button class="soft-btn" data-action="simulate-client-reply" data-id="${esc(selectedPatient.id)}" style="font-size:8.5px;color:var(--forest)" title="Simulate a reply from this client to test incoming messages">${icon("message",11)} Simulate client reply</button>
-              <button class="soft-btn" data-action="patient-book" data-id="${esc(selectedPatient.id)}" style="font-size:8.5px">Book visit</button>
+              <button class="secondary-btn" data-action="sync-client-replies" style="font-size:8.5px;display:inline-flex;align-items:center;gap:5px;color:var(--forest)" title="Check Hostinger IMAP for real client email replies">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                Sync real replies
+              </button>
+              ${selectedConvo.isPatient ? `
+                <button class="soft-btn" data-action="patient-detail" data-id="${esc(selectedConvo.patientId)}" style="font-size:8.5px">Patient record</button>
+                <button class="soft-btn" data-action="patient-book" data-id="${esc(selectedConvo.patientId)}" style="font-size:8.5px">Book visit</button>
+              ` : `
+                <button class="primary-btn" data-action="add-convo-as-patient" data-id="${esc(selectedConvo.id)}" style="font-size:8.5px;background:var(--forest);display:inline-flex;align-items:center;gap:4px">
+                  ${icon("plus",10)} Add as patient
+                </button>
+                <button class="soft-btn" data-action="delete-email-thread" data-id="${esc(selectedConvo.id)}" style="font-size:8.5px;color:#af6861" title="Delete email history">${icon("trash",11)} Delete thread</button>
+              `}
             </div>
           </div>
+          ${bannerHtml}
           <div class="inbox-feed" id="clientChatFeed">
             ${feedHtml}
           </div>
           <form class="inbox-compose" id="clientChatForm">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
               <label style="display:flex;align-items:center;gap:6px;font-size:8.5px;color:#5a6b63;cursor:pointer">
-                <input type="checkbox" name="sendAsEmail" ${selectedPatient.email ? "checked" : ""} ${selectedPatient.email ? "" : "disabled"}>
-                <span>Also dispatch as email to client (${selectedPatient.email ? esc(selectedPatient.email) : "no email on file"})</span>
+                <input type="checkbox" name="sendAsEmail" ${selectedConvo.email ? "checked" : ""} ${selectedConvo.email ? "" : "disabled"}>
+                <span>Also dispatch as email to client (${selectedConvo.email ? esc(selectedConvo.email) : "no email on file"})</span>
               </label>
               <select id="quickTemplateSelect" data-action="insert-chat-template" style="font-size:8.5px;padding:3px 8px;border:1px solid var(--line);border-radius:6px;background:#fff">
                 <option value="">Insert template…</option>
@@ -747,7 +981,7 @@
               </select>
             </div>
             <div style="display:flex;gap:8px;align-items:flex-end">
-              <textarea id="clientChatInput" name="body" required rows="2" placeholder="Write a message to ${esc(selectedPatient.name)} (Press Enter to send)…" style="flex:1;resize:vertical;min-height:46px;max-height:120px;padding:8px 10px;font-size:11px;border:1px solid var(--line);border-radius:9px;outline:none"></textarea>
+              <textarea id="clientChatInput" name="body" required rows="2" placeholder="Write a message to ${esc(selectedConvo.name)} (Press Enter to send)…" style="flex:1;resize:vertical;min-height:46px;max-height:120px;padding:8px 10px;font-size:11px;border:1px solid var(--line);border-radius:9px;outline:none"></textarea>
               <button class="primary-btn" type="submit" style="min-height:46px;padding:0 16px;display:flex;align-items:center;gap:5px">${icon("arrow",13)} Send</button>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#8a9690">
@@ -758,24 +992,46 @@
         `;
       }
 
+      const totalConvos=convos.length;
+      const patientConvosCount=convos.filter(c=>c.isPatient).length;
+      const inquiryConvosCount=convos.filter(c=>!c.isPatient).length;
+
       return `
         <section class="card card-pad" style="margin-bottom:16px">
           <div class="section-head">
             <div>
               <h2 class="section-title">Client inbox &amp; messaging</h2>
-              <div class="section-subtitle">Chat directly with patients and send synchronized email messages via Hostinger SMTP</div>
+              <div class="section-subtitle">Real-time chat and synchronized email messaging with incoming replies via Hostinger IMAP &amp; SMTP</div>
             </div>
             <div style="display:flex;gap:7px;align-items:center">
+              <button class="secondary-btn" data-action="sync-client-replies" style="font-size:8.5px;display:inline-flex;align-items:center;gap:5px">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                Sync real replies
+              </button>
               <button class="secondary-btn" data-action="add-patient" style="font-size:8.5px">${icon("plus",11)} New client</button>
             </div>
           </div>
           <div class="client-inbox">
             <aside class="inbox-sidebar">
               <div class="inbox-sidebar-head">
-                <label class="toolbar-search" style="height:30px">
-                  ${icon("search",11)}
-                  <input data-search="client-inbox" value="${esc(clientSearch)}" placeholder="Search clients…">
-                </label>
+                <div style="display:flex;gap:6px;align-items:center">
+                  <label class="toolbar-search" style="height:30px;flex:1;margin:0">
+                    ${icon("search",11)}
+                    <input data-search="client-inbox" value="${esc(clientSearch)}" placeholder="Search clients…">
+                  </label>
+                  <button class="icon-btn" data-action="sync-client-replies" title="Sync real email replies from Hostinger IMAP" style="width:30px;height:30px;flex-shrink:0" aria-label="Sync real replies">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                  </button>
+                </div>
+                <div style="display:flex;gap:4px;margin-top:6px">
+                  <button class="filter-chip ${clientInboxFilter==='all'?'active':''}" data-action="filter-client-inbox" data-filter="all" style="font-size:8px;padding:2px 7px">All (${totalConvos})</button>
+                  <button class="filter-chip ${clientInboxFilter==='patients'?'active':''}" data-action="filter-client-inbox" data-filter="patients" style="font-size:8px;padding:2px 7px">Patients (${patientConvosCount})</button>
+                  <button class="filter-chip ${clientInboxFilter==='inquiries'?'active':''}" data-action="filter-client-inbox" data-filter="inquiries" style="font-size:8px;padding:2px 7px">Inquiries (${inquiryConvosCount})</button>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#7a8a83;padding:4px 2px 0">
+                  <span style="display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#2ba384;display:inline-block"></span> Hostinger IMAP active</span>
+                  <span style="font-size:7.5px;color:#8a9791">${filteredConvos.length} conversation${filteredConvos.length===1?'':'s'}</span>
+                </div>
               </div>
               <div class="inbox-patient-list">
                 ${patientListHtml}
@@ -798,7 +1054,7 @@
       const callout=`<div class="info-callout">${icon("check",14)}<span><strong>Hostinger SMTP connected</strong>Outgoing messages, appointment receipts, reminders, and inbox emails are dispatched directly through authenticated mailbox: <b>${esc(db.settings.emailFrom||"support@vntera.com")}</b> via host <b>${esc(db.settings.smtpHost||"smtp.hostinger.com")}</b>.</span></div>`;
 
       const subtabs=`<div class="filter-row" style="margin-bottom:14px">
-        <button class="filter-chip ${communicationsTab==='inbox'?'active':''}" data-action="comm-tab" data-tab="inbox">${icon("message",12)} Client Inbox</button>
+        <button class="filter-chip ${communicationsTab==='inbox'?'active':''}" data-action="comm-tab" data-tab="inbox">${icon("message",12)} Client Inbox &amp; Real Replies</button>
         <button class="filter-chip ${communicationsTab==='templates'?'active':''}" data-action="comm-tab" data-tab="templates">${icon("mail",12)} Templates &amp; Test Email</button>
         <button class="filter-chip ${communicationsTab==='smtp'?'active':''}" data-action="comm-tab" data-tab="smtp">${icon("settings",12)} Email &amp; SMTP Configuration</button>
         <button class="filter-chip ${communicationsTab==='all'?'active':''}" data-action="comm-tab" data-tab="all">All sections</button>
@@ -810,7 +1066,7 @@
       else if(communicationsTab==="smtp") content=`${emailConfigCard}<div style="height:12px"></div>${callout}`;
       else content=`${inboxHtml}${templatesSection}${emailConfigCard}<div style="height:12px"></div>${callout}`;
 
-      return `${pageHeading("COMMUNICATIONS","Messages & templates","Chat with clients, manage email templates, and configure clinic mail delivery",`<button class="primary-btn" data-action="new-email">${icon("mail",13)} Compose email</button>`)}
+      return `${pageHeading("COMMUNICATIONS","Messages & templates","Chat with clients, manage email templates, and sync real incoming replies via Hostinger",`<button class="secondary-btn" data-action="sync-client-replies" style="display:inline-flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg> Sync client replies</button><button class="primary-btn" data-action="new-email">${icon("mail",13)} Compose email</button>`)}
       ${subtabs}
       ${content}`;
     }
@@ -1102,11 +1358,17 @@
         }
 
         saveDB();
+        const list = $(".inbox-patient-list");
+        const listScroll = list ? list.scrollTop : 0;
         render();
-        setTimeout(() => {
-          const feed = $("#clientChatFeed");
-          if(feed) feed.scrollTop = feed.scrollHeight;
-        }, 60);
+        const newList = $(".inbox-patient-list");
+        if(newList && listScroll) newList.scrollTop = listScroll;
+        scrollClientChatFeed();
+        requestAnimationFrame(() => {
+          scrollClientChatFeed();
+          const input = $("#clientChatInput");
+          if(input) input.focus();
+        });
         return;
       }
       if(form.id==="testEmailCardForm"){
@@ -1681,23 +1943,27 @@
       if(action==="comm-tab"){
         communicationsTab=target.dataset.tab||"inbox";
         render();
+        scrollClientChatFeed();
         if(communicationsTab==="inbox"||communicationsTab==="all"){
-          setTimeout(()=>{
-            const feed=$("#clientChatFeed");
-            if(feed) feed.scrollTop=feed.scrollHeight;
-          },50);
+          syncClientReplies(true);
         }
         return;
       }
       if(action==="select-client-chat"){
+        const list=$(".inbox-patient-list");
+        const listScroll=list?list.scrollTop:0;
         selectedClientPatientId=target.dataset.id;
         render();
-        setTimeout(()=>{
-          const feed=$("#clientChatFeed");
-          if(feed) feed.scrollTop=feed.scrollHeight;
+        const newList=$(".inbox-patient-list");
+        if(newList&&listScroll) newList.scrollTop=listScroll;
+        const activeBtn=document.querySelector(`.inbox-patient-item[data-id="${selectedClientPatientId}"]`);
+        if(activeBtn) activeBtn.scrollIntoView({block:"nearest",behavior:"smooth"});
+        scrollClientChatFeed();
+        requestAnimationFrame(()=>{
+          scrollClientChatFeed();
           const input=$("#clientChatInput");
           if(input) input.focus();
-        },50);
+        });
         return;
       }
       if(action==="chat-with-patient"){
@@ -1706,12 +1972,14 @@
         communicationsTab="inbox";
         page="communications";
         render();
-        setTimeout(()=>{
-          const feed=$("#clientChatFeed");
-          if(feed) feed.scrollTop=feed.scrollHeight;
+        const activeBtn=document.querySelector(`.inbox-patient-item[data-id="${selectedClientPatientId}"]`);
+        if(activeBtn) activeBtn.scrollIntoView({block:"nearest",behavior:"smooth"});
+        scrollClientChatFeed();
+        requestAnimationFrame(()=>{
+          scrollClientChatFeed();
           const input=$("#clientChatInput");
           if(input) input.focus();
-        },50);
+        });
         return;
       }
       if(action==="create-starter-client"){
@@ -1739,56 +2007,24 @@
             body:"Hello Sarah, your appointment with Dr. Hassoun is confirmed. Please let us know if you have any questions or need to reschedule.",
             channel:"email",
             createdAt:new Date(Date.now()-7200000).toISOString()
-          },
-          {
-            id:makeId("cmsg"),
-            patientId:demoClient.id,
-            sender:"client",
-            senderName:demoClient.name,
-            body:"Thank you Doctor! I received the email notification. Looking forward to the visit.",
-            channel:"chat",
-            createdAt:new Date(Date.now()-3600000).toISOString()
           }
         );
         recordActivity("patient-created",{name:demoClient.name,note:"sample client for chat inbox"});
         saveDB();
         render();
         toast("Sample client 'Sarah Jenkins' added to chat!");
-        setTimeout(()=>{
-          const feed=$("#clientChatFeed");
-          if(feed) feed.scrollTop=feed.scrollHeight;
-        },50);
+        scrollClientChatFeed();
+        syncClientReplies(true);
         return;
       }
-      if(action==="simulate-client-reply"){
-        const id=target.dataset.id||selectedClientPatientId;
-        const patient=findPatient(id);
-        if(!patient){toast("Select a client first.",true);return;}
-        const replies=[
-          "Thank you for the update! I will be there on time.",
-          "Received! Could you confirm if I need to bring any previous test results?",
-          "Sounds great Doctor, see you soon!",
-          "Thank you for following up so promptly.",
-          "Got the email notice as well. Everything is clear, thanks!"
-        ];
-        const randomReply=replies[Math.floor(Math.random()*replies.length)];
-        if(!db.clientMessages) db.clientMessages=[];
-        db.clientMessages.push({
-          id:makeId("cmsg"),
-          patientId:patient.id,
-          sender:"client",
-          senderName:patient.name,
-          body:randomReply,
-          channel:"chat",
-          createdAt:new Date().toISOString()
-        });
-        saveDB();
-        render();
-        setTimeout(()=>{
-          const feed=$("#clientChatFeed");
-          if(feed) feed.scrollTop=feed.scrollHeight;
-        },50);
-        toast(`Simulated incoming reply from ${patient.name}`);
+      if(action==="sync-client-replies"){
+        const btn=target;
+        const origContent=btn.innerHTML;
+        btn.disabled=true;
+        btn.innerHTML=`<span>⏳</span> Checking Hostinger...`;
+        await syncClientReplies(false);
+        btn.disabled=false;
+        btn.innerHTML=origContent;
         return;
       }
       if(action==="reset-email-config"){
@@ -2044,7 +2280,11 @@
     $("#sidebarScrim").addEventListener("click",()=>{$("#sidebar").classList.remove("open");$("#sidebarScrim").classList.remove("show");});
     window.addEventListener("storage",event=>{if(event.key===STORE_KEY){db=readDB();render();}});
      try{if(localStorage.getItem(NAV_COLLAPSED_KEY)==="1")document.documentElement.classList.add("nav-collapsed");}catch{}
-      setInterval(updateClock,1000);setInterval(()=>{if(page==="staffChat"&&currentUser)refreshStaffChat(true);},12000);setInterval(()=>{if(page!=="staffChat"||!currentUser)return;if(pruneExpiredChat()){render();return;}const timer=$("#chatExpiry");if(timer)timer.textContent=chatExpiryLabel();},60000);if(SERVER_MODE)initializeServerApp();else{if(runDataRepairs())saveDB();render();}
+      setInterval(updateClock,1000);
+      setInterval(()=>{if(page==="staffChat"&&currentUser)refreshStaffChat(true);},12000);
+      setInterval(()=>{if(page==="communications"&&currentUser)syncClientReplies(true);},15000);
+      setInterval(()=>{if(page!=="staffChat"||!currentUser)return;if(pruneExpiredChat()){render();return;}const timer=$("#chatExpiry");if(timer)timer.textContent=chatExpiryLabel();},60000);
+      if(SERVER_MODE)initializeServerApp();else{if(runDataRepairs())saveDB();render();syncClientReplies(true);}
   })();
   </script>
 </body>

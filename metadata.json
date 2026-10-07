@@ -1,0 +1,7 @@
+{
+  "name": "Doctor CRM - Vntera Clinic",
+  "description": "Local practice management and doctor CRM for appointments, patient records, payments, and staff coordination.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "doctor-crm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('Build complete')\""
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "imapflow": "^2.2.7",
+    "mailparser": "^3.9.36",
+    "nodemailer": "^6.10.0"
+  }
+}
